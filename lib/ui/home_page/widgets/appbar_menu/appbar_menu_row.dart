@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smp/ui/home_page/widgets/appbar_menu/help_tems.dart';
+import 'package:smp/ui/home_page/widgets/appbar_menu/menu_items.dart';
 
 class HomePageAppBarMenu extends StatelessWidget {
   const HomePageAppBarMenu({super.key});
@@ -7,11 +9,10 @@ class HomePageAppBarMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.horizontal,
+      ///calling all needed Row Items
       children: const [
-        Text("Menu"),
-        Text("Menu"),
-        Text("Menu"),
-        Text("Menu"),
+        MenuList(),
+        HelpList()
       ],
     );
   }

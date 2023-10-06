@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: MediaQuery.of(context).size.width,
         leading: Builder(builder: (context)=> const HomePageAppBarMenu()),
       ),
     );
