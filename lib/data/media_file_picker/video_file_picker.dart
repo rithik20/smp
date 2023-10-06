@@ -5,18 +5,15 @@ class VideoFilePickFromDevice{
 
   ///This [pickVideoFileFromDevice] method will pick only Video files from the
   ///Native Device. This method is called in the [OpenFileFromDevice] Cubit class
-  Future<FilePickerResult?> pickVideoFileFromDevice() async{
+  Future<String?> pickVideoFileFromDevice() async{
     try{
       ///Only Pick Video files
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.video
+        type: FileType.video,
+        allowMultiple: false,
       );
 
-      if(result != null){
-        return result;
-      }else{
-        return null;
-      }
+      return result!.files.first.path;
 
     }catch(_){
       return null;

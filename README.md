@@ -1,16 +1,11 @@
-# smp
+# SMP Media Player
 
-A new Flutter project.
+An Open source Media Player Application For Linux and Windows made with Flutter
 
-## Getting Started
+. Users can Watch Videos and Listen Audios from their Local Drive
 
-This project is a starting point for a Flutter application.
+. Also Watch Videos, and Listen Audios From Online Sites such as Youtube, Facebook, Instagram
 
-A few resources to get you started if this is your first Flutter project:
+. Add or Remove Subtitles
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+. Download Videos and Audios to their Local Drive If it's Possible!

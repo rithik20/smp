@@ -12,7 +12,7 @@ class HomePageAppBarMenu extends StatelessWidget {
       ///calling all needed Row Items
       children: const [
         MenuList(),
-        HelpList()
+        HelpList(),
       ],
     );
   }

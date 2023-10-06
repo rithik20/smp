@@ -2,7 +2,7 @@ import 'dart:io';
 
 class FileFromDevice{
 
-  File file;
+  File? file;
 
   FileFromDevice({required this.file});
 }
