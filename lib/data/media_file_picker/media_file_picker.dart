@@ -1,21 +1,19 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:smp/bloc/home_page_bloc/Menu_list_bloc/open_file_bloc/open_file_bloc_cubit.dart';
 
-class VideoFilePickFromDevice{
-
-  ///This [pickVideoFileFromDevice] method will pick only Video files from the
+class MediaFilePickFromDevice {
+  ///This [pickMediaFileFromDevice] method will pick Any files from the
   ///Native Device. This method is called in the [OpenFileFromDevice] Cubit class
-  Future<String?> pickVideoFileFromDevice() async{
-    try{
+  Future<String?> pickMediaFileFromDevice() async {
+    try {
       ///Only Pick Video files
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.video,
+        type: FileType.any,
         allowMultiple: false,
       );
 
       return result!.files.first.path;
-
-    }catch(_){
+    } catch (_) {
       return null;
     }
   }

@@ -1,6 +1,6 @@
-import 'package:smp/bloc/home_page_bloc/load_video_file/load_video_file_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/load_video_file/load_video_file_bloc.dart';
 
-class VideoProgressStreamClass{
+class MediaProgressStream{
 
   ///Use this [progressStream] to stream the Video's Current position
   Stream<Duration> progressStream() async*{

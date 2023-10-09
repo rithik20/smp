@@ -25,7 +25,23 @@ class HelpList extends StatelessWidget {
               ],
             )),
       ],
-      onSelected: (value) {},
+      onSelected: (value) async {
+        if (value == 0) {
+          await showAdaptiveDialog(
+              context: context,
+              builder: (context) => const AlertDialog(
+                    title: Center(
+                        child: Text(
+                      "Checking For Updates",
+                      style: TextStyle(fontSize: 20.0),
+                    )),
+                    content: SingleChildScrollView(
+                        child: Center(
+                      child: LinearProgressIndicator(),
+                    )),
+                  ));
+        }
+      },
     );
   }
 }

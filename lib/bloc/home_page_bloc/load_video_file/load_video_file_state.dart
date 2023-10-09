@@ -1,6 +1,6 @@
-class LoadVideoFile{
+class PickedMediaFile{
 
   String videoFilePath;
 
-  LoadVideoFile({required this.videoFilePath});
+  PickedMediaFile({required this.videoFilePath});
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smp/ui/home_page/widgets/appbar_menu/help_tems.dart';
 import 'package:smp/ui/home_page/widgets/appbar_menu/menu_items.dart';
+import 'package:smp/ui/home_page/widgets/appbar_menu/subtitle_menu.dart';
 
 class HomePageAppBarMenu extends StatelessWidget {
   const HomePageAppBarMenu({super.key});
@@ -13,6 +14,7 @@ class HomePageAppBarMenu extends StatelessWidget {
       children: const [
         MenuList(),
         HelpList(),
+        SubtitleTrackMenu()
       ],
     );
   }
