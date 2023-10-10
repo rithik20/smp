@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-import 'package:smp/bloc/home_page_bloc/load_video_file/load_video_file_bloc.dart';
-import 'package:smp/bloc/home_page_bloc/video_controls_logic/media_volume_bloc/media_volume_bloc.dart';
-import 'package:smp/bloc/home_page_bloc/video_controls_logic/seek/video_seek_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_state.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_volume_bloc/media_volume_bloc.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/seek/media_seek_cubit.dart';
 import 'package:smp/bloc/video_full_screen_bloc/video_fullscreen_cubit.dart';
 import 'package:smp/bloc/video_screen_fit_bloc/video_screen_fit_bloc.dart';
-import 'package:smp/bloc/video_screen_fit_bloc/video_screen_fit_state.dart';
 
 class ShowMediaToUser extends StatelessWidget {
   const ShowMediaToUser({super.key});
@@ -20,8 +20,8 @@ class ShowMediaToUser extends StatelessWidget {
     //For managing the volume of media
     final volume = BlocProvider.of<UpdateMediaVolume>(context);
 
+    //for working with FullScreen and exit FullScreen
     final fullScreen = BlocProvider.of<VideoFullscreenCubit>(context);
-
 
     return GestureDetector(
       onDoubleTap: () async {
@@ -59,29 +59,54 @@ class ShowMediaToUser extends StatelessWidget {
               ///If the user pressed the UpArrow Key in their Keyboard
               ///decrease the Volume by 10
               await volume.decreaseVolume();
-            }else if(event.physicalKey == PhysicalKeyboardKey.escape){
+            } else if (event.physicalKey == PhysicalKeyboardKey.escape) {
               await fullScreen.exitFullScreen();
             }
           },
           focusNode: FocusNode(),
 
-          ///Show the Video to User
-          child: Video(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+          ///Show the Video to User, also need to show the Screen Fit
+          ///State to the User, using Stack Widget in this Situation
+          child: Stack(
+            children: [
+              BlocBuilder<SetupMediaFilesToPlay, PickedMediaFile>(
+                builder: (context, state) {
+                  return Video(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
 
-              ///Change the Screen Fit With User interaction
-              ///Using [ChangeVideoScreenFit] Bloc
-              fit: screen.fit,
-              filterQuality: FilterQuality.high,
+                      ///Change the Screen Fit With User interaction
+                      ///Using [ChangeVideoScreenFit] Bloc
+                      fit: screen.fit,
+                      filterQuality: FilterQuality.high,
 
-              ///Use subtitles if possible
-              subtitleViewConfiguration: const SubtitleViewConfiguration(
-                  visible: true, textAlign: TextAlign.center),
+                      ///Use subtitles if possible
 
-              ///Changing the Default Controls with NoVideoControls
-              controls: NoVideoControls,
-              controller: controller),
+                      ///Changing the Default Controls with NoVideoControls
+                      controls: NoVideoControls,
+                      controller: state.controller);
+                },
+              ),
+
+              ///Showing the Screen Fit in the Ui using [AnimatedOpacity]
+              ///Widget after "1" seconds it will gone
+              AnimatedOpacity(
+                opacity: screen.isVisible ? 1.0 : 0.0,
+                duration: const Duration(seconds: 1),
+                child: Center(
+                  ///Show the [screenFitString] from the [PickedMediaFile]
+                  ///State class
+                  child: Text(
+                    screen.screenFitString,
+                    style: const TextStyle(
+                        fontSize: 100.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       }),
     );

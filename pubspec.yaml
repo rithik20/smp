@@ -1,5 +1,5 @@
 name: smp
-description: An Open Source Media Player For Windows and Linux Made With Flutter
+description: An Open Source Media Player For Windows Made With Flutter
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -42,8 +42,6 @@ dependencies:
   media_kit_libs_video: ^1.0.3
   audio_video_progress_bar: ^2.0.0
   flutter_launcher_icons: ^0.13.1
-  package_info: ^2.0.2
-  url_launcher: ^6.1.14
   equatable: ^2.0.5
   bloc: ^8.1.2
   get_it: ^7.6.4

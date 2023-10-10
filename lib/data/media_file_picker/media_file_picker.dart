@@ -6,7 +6,7 @@ class MediaFilePickFromDevice {
   ///Native Device. This method is called in the [OpenFileFromDevice] Cubit class
   Future<String?> pickMediaFileFromDevice() async {
     try {
-      ///Only Pick Video files
+      ///Pick Media files
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.any,
         allowMultiple: false,

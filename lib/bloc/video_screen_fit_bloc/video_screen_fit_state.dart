@@ -1,8 +1,22 @@
-import 'package:flutter/material.dart';
+part of 'video_screen_fit_bloc.dart';
 
-class VideoScreenFit{
+@immutable
+class VideoScreenFit {
+  final BoxFit fit;
 
-  BoxFit fit;
+  final String screenFitString;
 
-  VideoScreenFit({required this.fit});
+  final bool isVisible;
+
+  const VideoScreenFit(
+      {required this.fit,
+      required this.screenFitString,
+      required this.isVisible});
+}
+
+class InitialVideoScreenFit extends VideoScreenFit {
+  const InitialVideoScreenFit(
+      {required super.fit,
+      required super.screenFitString,
+      required super.isVisible});
 }

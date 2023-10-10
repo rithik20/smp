@@ -6,11 +6,11 @@ import 'package:smp/ui/home_page/widgets/media_volume/media_volume.dart';
 import 'package:smp/ui/video_controls_bar/fullscreen_change.dart';
 import 'package:smp/ui/video_controls_bar/screen_fit.dart';
 
-///This [BottomVideoControlsBar] Widget is for Showing the Controls and it's
+///This [BottomMediaControlsBar] Widget is for Showing the Controls and it's
 ///Progress to the User. This Widget is used in the [HomePage] Widget's
 ///[bottomNavigationBar]
-class BottomVideoControlsBar extends StatelessWidget {
-  const BottomVideoControlsBar({super.key});
+class BottomMediaControlsBar extends StatelessWidget {
+  const BottomMediaControlsBar({super.key});
 
   ///return [BottomAppBar] instead of [BottomNavigationBar]
   @override
@@ -18,7 +18,7 @@ class BottomVideoControlsBar extends StatelessWidget {
     return const BottomAppBar(
       child: Row(
         children: [
-          VideoControls(),
+          MediaControls(),
           Flexible(
               child: Align(
                   alignment: Alignment.bottomCenter,

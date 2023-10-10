@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smp/bloc/home_page_bloc/video_controls_logic/media_volume_bloc/media_volume_bloc.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_volume_bloc/media_volume_bloc.dart';
 
 class MediaVolumeWidget extends StatelessWidget {
   const MediaVolumeWidget({super.key});
