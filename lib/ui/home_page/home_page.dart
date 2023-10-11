@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+import 'package:smp/bloc/appBar_media_information/app_bar_media_information_cubit.dart';
 import 'package:smp/bloc/app_theme_bloc/app_theme_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_state.dart';
@@ -36,8 +38,38 @@ class HomePage extends StatelessWidget {
       appBar: fullScreen.state.isFullscreen
           ? null
           : AppBar(
+              ///Show the Media name in the AppBar using the [AppBarMediaInformationCubit]
+              title: BlocBuilder<AppBarMediaInformationCubit,
+                  AppBarMediaInformationState>(builder: (context, mediaInfo) {
+                ///If only single selected by the user then show the media name
+                ///with the help of [Platform.pathSeparator]
+                if (mediaInfo.singleMedia != "") {
+                  return Text(mediaInfo.singleMedia!
+                      .split(Platform.pathSeparator)
+                      .last);
+                }
+
+                ///If selected multiple files show the media name using
+                ///the [Playlist] and the [playlistIndex]
+                ///with the help of Uri
+                else if (mediaInfo.playlist != const Playlist([], index: 0)) {
+                  return Text(Uri.parse(mediaInfo
+                      .playlist!.medias[mediaInfo.playlistIndex].uri)
+                      .pathSegments.last);
+                }
+
+                ///If nothing selected then don't show anything in the AppBar
+                else {
+                  return const Text("");
+                }
+              }),
               toolbarHeight: 40.0,
-              leadingWidth: MediaQuery.of(context).size.width,
+
+              ///Show the Media File name in center
+              centerTitle: true,
+              leadingWidth: MediaQuery.of(context).size.width / 7,
+
+              ///show the Menus for the user to interact
               leading:
                   Builder(builder: (context) => const HomePageAppBarMenu()),
               actions: [
@@ -78,7 +110,7 @@ class HomePage extends StatelessWidget {
           if (file.videoFilePath == "" && file.playlist == const Playlist([])) {
             return Center(
               child: Image.asset(
-                "assets/launcher_icon/launcher_icon.png",
+                "assets/launcher_icon/launcher.png",
                 width: 300,
                 height: 300,
                 filterQuality: FilterQuality.high,
@@ -93,9 +125,9 @@ class HomePage extends StatelessWidget {
               builder: (context, state) {
                 return MouseRegion(
 
-                    ///Only work the OnHover when the [isFullScreen] variable becomes true
-                    ///on Hovering the mouse then show a Control bar using the
-                    ///BottomSheet
+                    ///Only work the OnHover when the [isFullScreen] variable becomes true,
+                    ///on Hovering the mouse in the screen then show a Control bar
+                    ///using the BottomSheet
                     onHover: state.isFullscreen
                         ? (v) {
                             showModalBottomSheet<void>(
@@ -120,10 +152,10 @@ class HomePage extends StatelessWidget {
                         : null,
                     child: Stack(
                       children: [
-                        ///Show the Media to User
+                        ///Show the Media
                         const ShowMediaToUser(),
 
-                        ///show Subtitle to the user
+                        ///show Subtitle
                         SubtitleView(
                             controller: VideoController(player,
                                 configuration:

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:smp/bloc/appBar_media_information/app_bar_media_information_cubit.dart';
 import 'package:smp/bloc/app_theme_bloc/app_theme_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/Menu_list_bloc/open_file_bloc/open_file_bloc_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/Menu_list_bloc/open_multiple_files/open_multiple_files_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_play_pause_stream/media_play_pause_stream_bloc.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_progress_bloc/media_progress_bloc.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_volume_bloc/media_volume_bloc.dart';
-import 'package:smp/bloc/home_page_bloc/media_controls_logic/play_and_pause/play_pause_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/seek/media_seek_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/video_full_screen_bloc/video_fullscreen_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/video_screen_fit_bloc/video_screen_fit_bloc.dart';
@@ -78,11 +79,12 @@ class _SMPMediaPlayerState extends State<SMPMediaPlayer> {
         BlocProvider(create: (context) => GetSubtitleFile()),
         BlocProvider(create: (context) => MediaProgressBloc()),
         BlocProvider(create: (context) => SetupMediaFilesToPlay()),
-        BlocProvider(create: (context) => UpdateMediaPlayPause()),
+        BlocProvider(create: (context) => MediaPlayPauseStreamBloc()),
         BlocProvider(create: (context) => SeekToThisPosition()),
         BlocProvider(create: (context) => ChangeVideoScreenFit()),
         BlocProvider(create: (context) => UpdateMediaVolume()),
         BlocProvider(create: (context) => VideoFullscreenCubit()),
+        BlocProvider(create: (context) => AppBarMediaInformationCubit()),
       ],
 
       ///Rebuild the App's Theme using the [AppThemeCubit] and it's

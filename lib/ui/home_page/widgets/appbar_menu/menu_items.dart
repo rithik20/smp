@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smp/bloc/appBar_media_information/app_bar_media_information_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/Menu_list_bloc/open_file_bloc/open_file_bloc_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/Menu_list_bloc/open_multiple_files/open_multiple_files_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_play_pause_stream/media_play_pause_stream_bloc.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_progress_bloc/media_progress_bloc.dart';
-import 'package:smp/bloc/home_page_bloc/media_controls_logic/play_and_pause/play_pause_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/multiple_media_playlist/multiple_media_playlist_cubit.dart';
 
 class MenuList extends StatelessWidget {
@@ -26,10 +27,13 @@ class MenuList extends StatelessWidget {
     final loadFile = BlocProvider.of<SetupMediaFilesToPlay>(context);
 
     //For playing the Medias
-    final playMedia = BlocProvider.of<UpdateMediaPlayPause>(context);
+    final playMedia = BlocProvider.of<MediaPlayPauseStreamBloc>(context);
 
     //For showing the Media progress
     final mediaProgress = BlocProvider.of<MediaProgressBloc>(context);
+
+    final appBarMediaInfo =
+        BlocProvider.of<AppBarMediaInformationCubit>(context);
 
     return PopupMenuButton(
       icon: const Text("Menu"),
@@ -64,10 +68,16 @@ class MenuList extends StatelessWidget {
               await loadFile
                   .initializeSingleFileMediaPlayer(openFile.state.file!.path);
 
+              appBarMediaInfo.singleMedia(loadFile.state.videoFilePath);
+
               ///If the player ready to play the media, then play the
               ///media with the path, using the [playMedia()] in the
               ///[UpdateMediaPlayPause] Cubit class
-              await playMedia.playMedia();
+              await player.play();
+
+              ///call the [StartMediaEvent] in the [MediaPlayPauseStreamEvent]
+              ///class to start the PlayPause Stream of [Player]
+              playMedia.add(StartMediaEvent());
 
               ///also show the Media progress in the Bar
               mediaProgress.add(StartProgress());
@@ -95,8 +105,15 @@ class MenuList extends StatelessWidget {
               await loadFile.initializeMultipleMediaPlayer(
                   multipleFilesPlaylist.state.playlist);
 
+              appBarMediaInfo
+                  .playlistMedia(multipleFilesPlaylist.state.playlist);
+
               ///and play the Medias
-              await playMedia.playMedia();
+              await player.play();
+
+              ///call the [StartMediaEvent] in the [MediaPlayPauseStreamEvent]
+              ///class to start the PlayPause Stream of [Player]
+              playMedia.add(StartMediaEvent());
 
               ///also show the Medias progress in the Bar
               mediaProgress.add(StartProgress());

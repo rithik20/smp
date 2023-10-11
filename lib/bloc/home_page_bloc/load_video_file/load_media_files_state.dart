@@ -33,6 +33,6 @@ class MediaPlayingSuccess extends PickedMediaFile {
 class MediaPlayingError extends PickedMediaFile {
   const MediaPlayingError(
       {required super.videoFilePath,
-        required super.controller,
-        required super.playlist});
+      required super.controller,
+      required super.playlist});
 }

@@ -53,7 +53,7 @@ dependencies:
 flutter_launcher_icons:
   windows:
     generate: true
-    image_path: "assets/launcher_icon/launcher_icon.png"
+    image_path: "assets/launcher_icon/launcher.png"
     icon_size: 48
 
 dev_dependencies:

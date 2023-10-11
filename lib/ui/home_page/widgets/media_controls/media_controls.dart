@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smp/bloc/appBar_media_information/app_bar_media_information_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_play_pause_stream/media_play_pause_stream_bloc.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_progress_bloc/media_progress_bloc.dart';
-import 'package:smp/bloc/home_page_bloc/media_controls_logic/play_and_pause/play_pause_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/seek/media_seek_cubit.dart';
 
 class MediaControls extends StatelessWidget {
@@ -11,14 +12,14 @@ class MediaControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //for play or pause the Media
-    final playPause = BlocProvider.of<UpdateMediaPlayPause>(context);
-
     //for seek the Media by 10 seconds
     final seek = BlocProvider.of<SeekToThisPosition>(context);
 
     //for stopping the progress of media
     final mediaProgress = BlocProvider.of<MediaProgressBloc>(context);
+
+    final appBarMediaIndex =
+        BlocProvider.of<AppBarMediaInformationCubit>(context);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -29,8 +30,11 @@ class MediaControls extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: IconButton(
               onPressed: () async {
-                //play previous Media if possible
-                await player.previous();
+                if (appBarMediaIndex.state.playlist!.medias.isNotEmpty) {
+                  appBarMediaIndex.previousIndex();
+                  //play previous Media if possible
+                  await player.previous();
+                }
               },
               tooltip: "Previous",
               icon: const Icon(Icons.skip_previous)),
@@ -53,23 +57,23 @@ class MediaControls extends StatelessWidget {
           child: IconButton(
               onPressed: () async {
                 ///Get the state of Player and call the Appropriate Methods
-                ///in the [UpdateMediaPlayPause] Cubit class
+                ///in the [Player] class to manage the play and pause
                 ///
                 /// if the [player] is playing then pause the media
                 /// else play the Media
                 if (player.state.playing) {
                   //pause the Media
-                  await playPause.pauseMedia();
+                  await player.pause();
                 } else {
                   //play the Media
-                  await playPause.playMedia();
+                  await player.play();
                 }
               },
               tooltip: "Play/Pause",
 
-              ///Rebuild the Icon based on the [MediaPlayPause] class's
-              ///state
-              icon: BlocBuilder<UpdateMediaPlayPause, MediaPlayPause>(
+              ///Rebuild the Icon based on the [MediaPlayPauseStreamState]
+              ///class's state
+              icon: BlocBuilder<MediaPlayPauseStreamBloc, MediaPlayPauseStreamState>(
                   builder: (context, playing) {
                 ///Rebuild the Icons based on the state
                 if (playing.isPlaying) {
@@ -103,8 +107,11 @@ class MediaControls extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: IconButton(
               onPressed: () async {
-                //play next Media if possible
-                await player.next();
+                if (appBarMediaIndex.state.playlist!.medias.isNotEmpty) {
+                  appBarMediaIndex.nextIndex();
+                  //play next Media if possible
+                  await player.next();
+                }
               },
               tooltip: "Next",
               icon: const Icon(Icons.skip_next)),

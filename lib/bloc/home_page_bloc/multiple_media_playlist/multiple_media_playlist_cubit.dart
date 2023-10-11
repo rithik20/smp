@@ -7,7 +7,7 @@ part 'multiple_media_playlist_state.dart';
 
 class MultipleMediaPlaylistCubit extends Cubit<MultipleMediaPlaylistState> {
   MultipleMediaPlaylistCubit()
-      : super(const MultipleMediaPlaylistInitial(playlist: Playlist([])));
+      : super(const MultipleMediaPlaylistInitial(playlist: Playlist([], index: 0)));
 
   void addAllMediasToPlaylist(List<PlatformFile>? list){
     try {
@@ -17,10 +17,10 @@ class MultipleMediaPlaylistCubit extends Cubit<MultipleMediaPlaylistState> {
         for (int i = 0; i < list.length; i ++) {
           playlist.add(Media(list[i].path!));
         }
-        emit(MultipleMediaPlaylistCreated(playlist: Playlist(playlist)));
+        emit(MultipleMediaPlaylistCreated(playlist: Playlist(playlist, index: 0)));
       }
     }catch(_){
-      emit(const MultipleMediaPlaylistError(playlist: Playlist([])));
+      emit(const MultipleMediaPlaylistError(playlist: Playlist([], index: 0)));
     }
   }
 }
