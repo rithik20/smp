@@ -24,15 +24,17 @@ Future<void> main() async {
   await Hive.initFlutter();
 
   ///Open the Box named "smp", if not created it will create a new one
-  ///the [smp] is a late Box<dynamic> variable, declared in the [AppThemeCubit]
+  ///the [smp] is a late LazyBox<dynamic> variable, declared in the [AppThemeCubit]
+  ///class
   ///
-  smp = await Hive.openBox("smp");
+  smp = await Hive.openLazyBox("smp");
 
   ///get the value of "theme" key from the Database
   ///if not found add a defaultValue to it
   ///the [theme] is a late String variable, declared in the [AppThemeCubit]
+  ///class
   ///
-  theme = smp.get("theme", defaultValue: "light");
+  theme = await smp.get("theme", defaultValue: "light");
 
   ///If the [theme] gets the value of "dark" then assign
   ///[ThemeData.dark(useMaterial3: true)] to the [themeData] late ThemeData
@@ -48,11 +50,22 @@ Future<void> main() async {
   MediaKit.ensureInitialized();
   //call the getIt singletons
   services();
-  runApp(const MediaPlayer());
+  runApp(const SMPMediaPlayer());
 }
 
-class MediaPlayer extends StatelessWidget {
-  const MediaPlayer({super.key});
+class SMPMediaPlayer extends StatefulWidget {
+  const SMPMediaPlayer({super.key});
+
+  @override
+  State<SMPMediaPlayer> createState() => _SMPMediaPlayerState();
+}
+
+class _SMPMediaPlayerState extends State<SMPMediaPlayer> {
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

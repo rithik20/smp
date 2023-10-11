@@ -7,7 +7,7 @@ part 'app_theme_state.dart';
 
 ///These [smp], [theme], and the [themeData] variables will assigned
 ///in the [main] method
-late Box<dynamic> smp;
+late LazyBox<dynamic> smp;
 late String theme;
 late ThemeData themeData;
 

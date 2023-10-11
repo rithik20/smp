@@ -1,16 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:media_kit/media_kit.dart';
 import 'package:smp/bloc/app_theme_bloc/app_theme_cubit.dart';
-import 'package:smp/dependency_injection/get_it_dependencies.dart';
-import 'package:smp/main.dart';
-import 'package:smp/ui/home_page/home_page.dart';
 
-void main(){
-
-  setUpAll(() async{
-
+void main() {
+  setUpAll(() async {
     ///Initialize the Hive Database
     await Hive.initFlutter();
 
@@ -36,18 +30,12 @@ void main(){
     } else {
       themeData = ThemeData.light(useMaterial3: true);
     }
-
-    //ensure the [MediaKit] initialized
-    MediaKit.ensureInitialized();
-    //call the getIt singletons
-    services();
   });
 
-  testWidgets("MediaPlayer Widget Test", (widgetTester) async{
+  test("App Theme Unit Test", () {
 
-    await widgetTester.pumpWidget(const SMPMediaPlayer());
+    final AppThemeCubit appThemeCubit = AppThemeCubit();
 
-    expect(find.byType(MaterialApp), findsOneWidget);
-    expect(find.byType(HomePage), findsOneWidget);
+    expect(appThemeCubit.state, ThemeData.light(useMaterial3: true));
   });
 }

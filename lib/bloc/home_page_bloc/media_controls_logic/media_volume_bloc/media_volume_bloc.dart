@@ -13,7 +13,7 @@ class UpdateMediaVolume extends Cubit<MediaVolumeState> {
     ///Stop increasing the Volume when reached 200!
     if (player.state.volume != 200) {
       ///Increase the Volume by 10
-      final currentVolume = player.state.volume + 10.0;
+      final currentVolume = state.mediaVolume + 10.0;
 
       ///Emit the Success State
       emit(MediaVolumeIncreased(
@@ -37,7 +37,7 @@ class UpdateMediaVolume extends Cubit<MediaVolumeState> {
     ///Stop decreasing the Volume when reached 0!
     if (player.state.volume != 0) {
       ///decrease the Volume by 10
-      final currentVolume = player.state.volume - 10.0;
+      final currentVolume = state.mediaVolume - 10.0;
 
       ///Emit the Success State
       emit(MediaVolumeDecreased(
