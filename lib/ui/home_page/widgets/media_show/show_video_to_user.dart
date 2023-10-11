@@ -6,8 +6,8 @@ import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.d
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_state.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_volume_bloc/media_volume_bloc.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/seek/media_seek_cubit.dart';
-import 'package:smp/bloc/video_full_screen_bloc/video_fullscreen_cubit.dart';
-import 'package:smp/bloc/video_screen_fit_bloc/video_screen_fit_bloc.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/video_full_screen_bloc/video_fullscreen_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/video_screen_fit_bloc/video_screen_fit_bloc.dart';
 
 class ShowMediaToUser extends StatelessWidget {
   const ShowMediaToUser({super.key});

@@ -6,15 +6,15 @@ import 'package:smp/bloc/app_theme_bloc/app_theme_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_state.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_volume_bloc/media_volume_bloc.dart';
-import 'package:smp/bloc/video_full_screen_bloc/video_fullscreen_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/video_full_screen_bloc/video_fullscreen_cubit.dart';
 import 'package:smp/ui/home_page/widgets/appbar_menu/appbar_menu_row.dart';
 import 'package:smp/ui/home_page/widgets/media_controls/media_controls.dart';
 import 'package:smp/ui/home_page/widgets/media_show/media_progress_show/media_progress_bar.dart';
 import 'package:smp/ui/home_page/widgets/media_show/show_video_to_user.dart';
 import 'package:smp/ui/home_page/widgets/media_volume/media_volume.dart';
-import 'package:smp/ui/video_controls_bar/bottom_video_controls_bar.dart';
-import 'package:smp/ui/video_controls_bar/fullscreen_change.dart';
-import 'package:smp/ui/video_controls_bar/screen_fit.dart';
+import 'package:smp/ui/home_page/widgets/video_controls_bar/bottom_video_controls_bar.dart';
+import 'package:smp/ui/home_page/widgets/video_controls_bar/fullscreen_change.dart';
+import 'package:smp/ui/home_page/widgets/video_controls_bar/screen_fit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

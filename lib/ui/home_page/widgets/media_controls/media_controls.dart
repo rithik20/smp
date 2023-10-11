@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/media_progress_bloc/media_progress_bloc.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/play_and_pause/play_pause_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/media_controls_logic/seek/media_seek_cubit.dart';
-import 'package:smp/bloc/media_progress_bloc/media_progress_bloc.dart';
 
 class MediaControls extends StatelessWidget {
   const MediaControls({super.key});

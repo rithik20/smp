@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smp/bloc/video_full_screen_bloc/video_fullscreen_cubit.dart';
+import 'package:smp/bloc/home_page_bloc/media_controls_logic/video_full_screen_bloc/video_fullscreen_cubit.dart';
 
 class FullscreenSwitchMode extends StatelessWidget {
   const FullscreenSwitchMode({super.key});
