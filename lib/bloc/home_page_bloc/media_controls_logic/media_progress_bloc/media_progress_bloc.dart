@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:smp/bloc/home_page_bloc/load_video_file/load_media_files_cubit.dart';
+import 'package:smp/data/media_progress_stream/media_progress_stream.dart';
 import 'package:smp/dependency_injection/get_it_dependencies.dart';
-import 'package:smp/dependency_injection/providers/media_progress_stream/media_progress_stream.dart';
 
 part 'media_progress_event.dart';
 
