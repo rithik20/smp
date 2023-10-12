@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:smp/bloc/appBar_media_information/app_bar_media_information_cubit.dart';
+import 'package:smp/bloc/app_latest_version_check/app_latest_version_check_cubit.dart';
 import 'package:smp/bloc/app_theme_bloc/app_theme_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/Menu_list_bloc/open_file_bloc/open_file_bloc_cubit.dart';
 import 'package:smp/bloc/home_page_bloc/Menu_list_bloc/open_multiple_files/open_multiple_files_cubit.dart';
@@ -21,25 +23,37 @@ import 'package:smp/ui/home_page/home_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  //ensure the [MediaKit] initialized
+  MediaKit.ensureInitialized();
+
+  //call the getIt singletons
+  services();
+
+  ///For getting the Package Information of this Application
+  ///the [packageInfo] is a late variable is declared in the
+  ///[smp/bloc/app_latest_version_check/app_latest_version_check_cubit.dart]
+  packageInfo = await PackageInfo.fromPlatform();
+
   ///Initialize the Hive Database
   await Hive.initFlutter();
 
   ///Open the Box named "smp", if not created it will create a new one
   ///the [smp] is a late LazyBox<dynamic> variable, declared in the [AppThemeCubit]
-  ///class
+  ///class, [smp/bloc/app_theme_bloc/app_theme_cubit.dart]
   ///
   smp = await Hive.openLazyBox("smp");
 
   ///get the value of "theme" key from the Database
   ///if not found add a defaultValue to it
   ///the [theme] is a late String variable, declared in the [AppThemeCubit]
-  ///class
+  ///class, [smp/bloc/app_theme_bloc/app_theme_cubit.dart]
   ///
   theme = await smp.get("theme", defaultValue: "light");
 
   ///If the [theme] gets the value of "dark" then assign
   ///[ThemeData.dark(useMaterial3: true)] to the [themeData] late ThemeData
-  ///variable in the [AppThemeCubit], otherwise ThemeData.light(useMaterial3: true)
+  ///variable in the [AppThemeCubit],[smp/bloc/app_theme_bloc/app_theme_cubit.dart]
+  /// otherwise ThemeData.light(useMaterial3: true)
   ///
   if (theme == "dark") {
     themeData = ThemeData.dark(useMaterial3: true);
@@ -47,10 +61,6 @@ Future<void> main() async {
     themeData = ThemeData.light(useMaterial3: true);
   }
 
-  //ensure the [MediaKit] initialized
-  MediaKit.ensureInitialized();
-  //call the getIt singletons
-  services();
   runApp(const SMPMediaPlayer());
 }
 
@@ -85,6 +95,7 @@ class _SMPMediaPlayerState extends State<SMPMediaPlayer> {
         BlocProvider(create: (context) => UpdateMediaVolume()),
         BlocProvider(create: (context) => VideoFullscreenCubit()),
         BlocProvider(create: (context) => AppBarMediaInformationCubit()),
+        BlocProvider(create: (context) => AppLatestVersionCheckCubit()),
       ],
 
       ///Rebuild the App's Theme using the [AppThemeCubit] and it's
