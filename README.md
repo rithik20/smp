@@ -17,6 +17,7 @@
 ## Screenshots
 
 ![Alt text](/assets/screenshots/Screenshot%202023-10-12%20083531.png)
+![Alt text](/assets/screenshots/Screenshot%202023-10-12%20083554.png)
 ![Alt text](/assets/screenshots/Screenshot%202023-10-12%20083644.png)
 
 # Building From Source
