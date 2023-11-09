@@ -17,7 +17,6 @@
 ## Screenshots
 
 ![Screenshot 1](assets/screenshots/083531.png)
-![Screenshot 1](https://raw.githubusercontent.com/rithik20/smp/master/assets/screenshots/083531.png)
 ![Screenshot 2](assets/screenshots/083554.png)
 ![Screenshot 3](assets/screenshots/083644.png)
 
