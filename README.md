@@ -27,7 +27,7 @@
 ```
 git clone https://github.com/rithik20/smp.git
 ```
-3. Run the app with IntelliJ IDEA or VS Code. Or the command line:
+Run the app with IntelliJ IDEA or VS Code. Or the command line:
 
 ```
 flutter pub get
